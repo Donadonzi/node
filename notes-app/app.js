@@ -6,6 +6,7 @@
 const getNotes = require('./note');
 const validator = require('validator');
 const chalk = require('chalk');
+const yargs = require('yargs')
 
 // console.log(getNotes());
 
@@ -29,6 +30,66 @@ console.log(chalk.cyan.bold.underline('It\'s gonna be alright!'));
 */
 
 /* ============== USING process.argv ===================== */
-console.log(process.argv);
-console.log(process.argv[2]);
+// console.log(process.argv);
+// console.log(process.argv[2]);
 
+
+/* ============== USING yargs ===================== */
+
+// Customize yargs version
+// yargs.version('1.1.0')
+
+
+// Create add command
+yargs.command({
+	command: 'add',
+	describe: 'Add a new note',
+	builder: {
+		title: {
+			describe: 'Note title',
+			demandOption: true,
+			type: 'string'
+		},
+		body: {
+			describe: 'Note description',
+			demandOption: true,
+			type: 'string'
+		}	
+	},
+	handler: function(argv) {
+		console.log(chalk.green('Adding a new note with the title: ') + chalk.red(argv.title) + ' It is about ' + chalk.blue(argv.body))
+	}
+})
+
+// Create remove command
+yargs.command({
+	command: 'remove',
+	describe: 'Remove a note',
+	handler: function() {
+		console.log('Removing the note...')
+	}
+})
+
+// Create list command
+yargs.command({
+	command: 'list',
+	describe: 'Lists the existing notes',
+	handler: function() {
+		console.log('Listing all notes...')
+	}
+})
+
+// Create read command
+yargs.command({
+	command: 'read',
+	describe: 'Read a note',
+	handler: function() {
+		console.log('Reading a note...')
+	}
+})
+
+
+// This is needed for running the program. But if we want we can use yargs.parse instead.
+// console.log(yargs.argv)
+
+yargs.parse() 
