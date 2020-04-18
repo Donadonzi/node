@@ -24,7 +24,8 @@ const bookJSON = JSON.stringify(book)
 
 const dataStr = fs.readFileSync('1-json.json').toString();
 const dataJSON = JSON.parse(dataStr);
-dataJSON.name = 'Donya';
-dataJSON.age = 36;
+// dataJSON.name = 'Donya';
+// dataJSON.age = 36;
+// console.log(dataStr)
 console.log(dataJSON)
-fs.appendFileSync('1-json.json', JSON.stringify(dataJSON))
+// fs.appendFileSync('1-json.json', JSON.stringify(dataJSON))

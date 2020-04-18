@@ -3,7 +3,7 @@
 // fs.appendFileSync('note.txt', ' And this line was appended later!')
 
 
-const getNotes = require('./note');
+const note = require('./note');
 const validator = require('validator');
 const chalk = require('chalk');
 const yargs = require('yargs')
@@ -56,8 +56,9 @@ yargs.command({
 			type: 'string'
 		}	
 	},
-	handler: function(argv) {
-		console.log(chalk.green('Adding a new note with the title: ') + chalk.red(argv.title) + ' It is about ' + chalk.blue(argv.body))
+	handler(argv) {
+		// console.log(chalk.green('Adding a new note with the title: ') + chalk.red(argv.title) + ' It is about ' + chalk.blue(argv.body))
+		note.addNotes(argv.title, argv.body)
 	}
 })
 
@@ -65,8 +66,15 @@ yargs.command({
 yargs.command({
 	command: 'remove',
 	describe: 'Remove a note',
-	handler: function() {
-		console.log('Removing the note...')
+	builder: {
+		title: {
+			describe: 'Note title',
+			demandOption: true,
+			type: 'string'
+		}
+	},
+	handler(argv) {
+		note.removeNotes(argv.title)
 	}
 })
 
@@ -74,7 +82,7 @@ yargs.command({
 yargs.command({
 	command: 'list',
 	describe: 'Lists the existing notes',
-	handler: function() {
+	handler() {
 		console.log('Listing all notes...')
 	}
 })
@@ -83,7 +91,7 @@ yargs.command({
 yargs.command({
 	command: 'read',
 	describe: 'Read a note',
-	handler: function() {
+	handler() {
 		console.log('Reading a note...')
 	}
 })
@@ -93,3 +101,4 @@ yargs.command({
 // console.log(yargs.argv)
 
 yargs.parse() 
+
