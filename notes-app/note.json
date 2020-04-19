@@ -1,1 +1,9 @@
-[{"title":"New note","body":"Buy ice cream"},{"title":"shopping list","body":"This is to test the arrow functions"},{"title":"sopping list","body":""}]
+[
+  { "title": "New note", "body": "Buy ice cream" },
+  { "title": "shopping list", "body": "This is to test the arrow functions" },
+  { "title": "sopping list", "body": "" },
+  {
+    "title": "test debugger",
+    "body": "This note was created to see what the debugger does"
+  }
+]
