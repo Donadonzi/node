@@ -16,11 +16,14 @@ weatherForm.addEventListener('submit', (e) => {
 	forecastElement.textContent = '';
 
 	const location = search.value;
-	fetch(`http://localhost:3000/weather?address=${location}`).then((response) => {
+	// Must modify the url so that it works when deployed on heroku
+	// fetch(`http://localhost:3000/weather?address=${location}`).then((response) => {
+
+	fetch(`/weather?address=${location}`).then((response) => {
 		response.json().then((data) => {
 			if (data.error) {
 				locationElement.textContent = '';
-				return errorElement.textContent = data.error;	
+				return errorElement.textContent = data.error;
 			}
 			errorElement.textContent = '';
 			locationElement.textContent = data.location;
