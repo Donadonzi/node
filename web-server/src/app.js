@@ -105,5 +105,5 @@ app.get('*', (req, res) => {
 
 
 app.listen(3000, () => {
-	console.log('Server is running!')
+	console.log('Yallah! Server umad bala!')
 }); // port is optional

@@ -1,6 +1,6 @@
 const request = require('request');
 
-var weatherstackKey = "58eda886b1b01555ca763a7698831ab9";
+const weatherstackKey = "58eda886b1b01555ca763a7698831ab9";
 
 
 // This is the first version, before turning it to a reusable function.

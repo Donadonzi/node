@@ -1,5 +1,5 @@
 const request = require("request");
-var mapboxToken =
+const mapboxToken =
 	"pk.eyJ1IjoiZG9uYWRvbnppIiwiYSI6ImNrOTducXJhbDBkcGIzbWxlNWx5cHM4b3YifQ.E74o4qlSnxTxGApL22LUsw";
 
 
