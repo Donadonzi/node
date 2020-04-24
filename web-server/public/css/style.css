@@ -3,7 +3,7 @@ html {
 }
 
 body {
-	color: #2b50b8;
+	color: #01928b;
 	padding: 0 2rem;
 	min-height: 100vh;
 	margin: 0 auto;
@@ -43,4 +43,25 @@ header {
 .main-content {
 	flex-grow: 1;
 }
+
+input {
+	border: 1px solid #ccc;
+	padding: 8px;
+	border-radius: 3px;
+}
+
+
+button {
+	color: white;
+	padding: 8px;
+	background-color: teal;
+	border-radius: 3px;
+	border: 1px solid teal;
+	cursor: pointer;
+}
+
+#errorMsg {
+	color: red;
+}
+
 

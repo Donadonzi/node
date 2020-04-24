@@ -1,6 +1,8 @@
 const path = require('path');
 const express = require('express');
 const hbs = require('hbs');
+const geocode = require('./utils/geocode');
+const forecast = require('./utils/forecast');
 
 const app = express();
 
@@ -17,6 +19,7 @@ hbs.registerPartials(partialsPath);
 // Setup static directory to serve
 app.use(express.static(publicDirectory));
 
+// Route handlers
 app.get('', (req, res) => {
 	res.render('index', {
 		title: 'Weather App',
@@ -45,6 +48,29 @@ app.get('/help/*', (req, res) => {
 		name: 'Donadonzi',
 		title: '404'
 	})
+});
+
+app.get('/weather', (req, res) => {
+	if (!req.query.address) {
+		return res.send({
+			error: 'Address must be provided.'
+		});
+	}
+	geocode(req.query.address, (error, { latitude, longitude, location } = {} ) => {
+		if (error) {
+			return res.send({ error });
+		}
+		forecast(latitude, longitude, (error, forecastData) => {
+			if (error) {
+			return res.send({ error });
+			}
+			res.send({
+				location,
+				forecast: forecastData,
+				address: req.query.address
+			});
+		});
+	}); 
 });
 
 app.get('*', (req, res) => {
@@ -76,12 +102,7 @@ app.get('*', (req, res) => {
 // 	res.send(`<h2>What about sunrise?</h2>`);
 // });
 
-app.get('/weather', (req, res) => {
-	res.send({
-		location: 'Toronto',
-		forecast: 'Sunny'
-	});
-});
+
 
 app.listen(3000, () => {
 	console.log('Server is running!')
