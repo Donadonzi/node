@@ -73,35 +73,74 @@ MongoClient.connect(connectionURL, { useNewUrlParser: true, useUnifiedTopology: 
 */
 
 // ******* READ *********** //
+
+// MongoClient.connect(connectionURL, { useNewUrlParser: true, useUnifiedTopology: true }, (error, client) => {
+// 	if (error) {
+// 		return console.log('Unable to connect to the database.')
+// 	}
+// 	const db = client.db(databaseName);
+
+// 	// db.collection('users').findOne({ name: 'Donya' }, (error, user) => {
+// 	// 	if (error) {
+// 	// 		return console.log('Unable to fetch.');
+// 	// 	}
+// 	// 	console.log(user);
+// 	// });
+
+// 	// db.collection('users').find({ age: 36 }).toArray((error, users) => {
+// 	// 	console.log(users);
+// 	// });
+
+// 	// db.collection('users').find({ age: 36 }).count((error, count) => {
+// 	// 	console.log(count);
+// 	// });
+
+// 	db.collection('tasks').findOne({ _id: new ObjectID("5ea6204c30cbe23dd836b622") }, (error, task) => {
+// 		if (error) {
+// 			return console.log('Unable to fetch task.');
+// 		}
+// 		console.log(task);
+// 	});
+
+// 	db.collection('tasks').find({ completed: false }).toArray((error, tasks) => {
+// 		console.log(tasks);
+// 	});
+// });
+
+
+// ******* UPDATE *********** //
 MongoClient.connect(connectionURL, { useNewUrlParser: true, useUnifiedTopology: true }, (error, client) => {
 	if (error) {
 		return console.log('Unable to connect to the database.')
 	}
 	const db = client.db(databaseName);
 
-	// db.collection('users').findOne({ name: 'Donya' }, (error, user) => {
-	// 	if (error) {
-	// 		return console.log('Unable to fetch.');
-	// 	}
-	// 	console.log(user);
-	// });
 
-	// db.collection('users').find({ age: 36 }).toArray((error, users) => {
-	// 	console.log(users);
-	// });
-
-	// db.collection('users').find({ age: 36 }).count((error, count) => {
-	// 	console.log(count);
-	// });
-
-	db.collection('tasks').findOne({ _id: new ObjectID("5ea6204c30cbe23dd836b622") }, (error, task) => {
-		if (error) {
-			return console.log('Unable to fetch task.');
+	// Updates ONE document
+	db.collection('users').updateOne({
+		_id: new ObjectID("5ea6229353c2b1390cca48c4")
+	}, {
+		// $set: {
+		// 	age: 60
+		// }
+		$inc: {
+			age: 5
 		}
-		console.log(task);
+	}).then(result => {
+		console.log(result.modifiedCount);
+	}).catch(error => {
+		console.log(error);
+	})
+
+	// Updates 	MORE THAN ONE documents
+	db.collection('tasks').updateMany({ completed: false }, {
+		$set: {
+			completed: true
+		}
+	}).then(result => {
+		console.log(result.modifiedCount);
+	}).catch(error => {
+		console.log(error);
 	});
 
-	db.collection('tasks').find({ completed: false }).toArray((error, tasks) => {
-		console.log(tasks);
-	});
 });
