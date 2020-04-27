@@ -109,38 +109,63 @@ MongoClient.connect(connectionURL, { useNewUrlParser: true, useUnifiedTopology: 
 
 
 // ******* UPDATE *********** //
+// MongoClient.connect(connectionURL, { useNewUrlParser: true, useUnifiedTopology: true }, (error, client) => {
+// 	if (error) {
+// 		return console.log('Unable to connect to the database.')
+// 	}
+// 	const db = client.db(databaseName);
+
+
+// 	// Updates ONE document
+// 	db.collection('users').updateOne({
+// 		_id: new ObjectID("5ea6229353c2b1390cca48c4")
+// 	}, {
+// 		// $set: {
+// 		// 	age: 60
+// 		// }
+// 		$inc: {
+// 			age: 5
+// 		}
+// 	}).then(result => {
+// 		console.log(result.modifiedCount);
+// 	}).catch(error => {
+// 		console.log(error);
+// 	})
+
+// 	// Updates 	MORE THAN ONE documents
+// 	db.collection('tasks').updateMany({ completed: false }, {
+// 		$set: {
+// 			completed: true
+// 		}
+// 	}).then(result => {
+// 		console.log(result.modifiedCount);
+// 	}).catch(error => {
+// 		console.log(error);
+// 	});
+
+// });
+
+// ******* DELETE *********** //
 MongoClient.connect(connectionURL, { useNewUrlParser: true, useUnifiedTopology: true }, (error, client) => {
 	if (error) {
 		return console.log('Unable to connect to the database.')
 	}
 	const db = client.db(databaseName);
 
+	db.collection('users').deleteMany({ name: 'Donya' })
+		.then(result => {
+			console.log(result.deletedCount);
+		})
+		.catch(error => {
+			console.log(error);
+		});
 
-	// Updates ONE document
-	db.collection('users').updateOne({
-		_id: new ObjectID("5ea6229353c2b1390cca48c4")
-	}, {
-		// $set: {
-		// 	age: 60
-		// }
-		$inc: {
-			age: 5
-		}
-	}).then(result => {
-		console.log(result.modifiedCount);
-	}).catch(error => {
-		console.log(error);
-	})
-
-	// Updates 	MORE THAN ONE documents
-	db.collection('tasks').updateMany({ completed: false }, {
-		$set: {
-			completed: true
-		}
-	}).then(result => {
-		console.log(result.modifiedCount);
-	}).catch(error => {
-		console.log(error);
-	});
+	db.collection('tasks').deleteOne({ task: 'Buy groceries' })
+		.then(result => {
+			console.log(result.deletedCount);
+		})
+		.catch(error => {
+			console.log(error);
+		});
 
 });
