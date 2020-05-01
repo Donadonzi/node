@@ -1,5 +1,6 @@
 
-/////////// This file is NOT part of the task-manager project. It was made only for learning stuff./////////////////
+/////////// This file is NOT part of the task-manager project. It was made only for learning stuff. /////////////////
+/////////// These operations are done by MongoDB native driver. But we use Mongoose in task-manager for this purpose. ///////////
 
 // CRUD
 
