@@ -53,7 +53,13 @@ router.patch('/users/:id', async (req, res) => {
 	}
 	const _id = req.params.id;
 	try {
-		const user = await User.findByIdAndUpdate(_id, req.body, { new: true, runValidators: true });
+		// Refactored this in order to be able to use Middlewares. Cuz this .findByIdAndUpdate() bypasses middlewares
+		// const user = await User.findByIdAndUpdate(_id, req.body, { new: true, runValidators: true });
+
+		const user = await User.findById(_id);
+		updates.forEach(item => user[item] = req.body[item]);
+		await user.save();
+
 		if (!user) {
 			return res.status(400).send();
 		}
@@ -78,5 +84,16 @@ router.delete('/users/:id', async (req, res) => {
 	}
 });
 
+
+///////////////// LOGIN /////////////////
+router.post('/users/login', async (req, res) => {
+	try {
+		const user = await User.findByCredentials(req.body.email, req.body.password);
+		res.send(user);
+	}
+	catch (e) {
+		res.status(400).send();
+	}
+});
 
 module.exports = router;
