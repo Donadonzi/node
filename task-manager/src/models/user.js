@@ -48,6 +48,8 @@ const userSchema = new mongoose.Schema({
 			required: true
 		}
 	}]
+}, {
+	timestamps: true   // to keep records of time of creation and modification on documents
 });
 
 userSchema.virtual('tasks', {
