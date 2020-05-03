@@ -11,9 +11,6 @@ app.listen(port, () => {
 	console.log('Yallah! Server umad bala roo port ' + port);
 });
 
-// app.use((req, res, next) => {
-// 	res.status(503).send('Temporarily down!');
-// });
 
 app.use(express.json());
 app.use(userRouter);

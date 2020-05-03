@@ -47,10 +47,14 @@ const userSchema = new mongoose.Schema({
 			type: String,
 			required: true
 		}
-	}]
-}, {
-	timestamps: true   // to keep records of time of creation and modification on documents
-});
+	}],
+	avatar: {
+		type: Buffer
+	}
+},
+	{
+		timestamps: true   // to keep records of time of creation and modification on documents
+	});
 
 userSchema.virtual('tasks', {
 	ref: 'Task',
@@ -65,6 +69,7 @@ userSchema.methods.toJSON = function () {
 
 	delete userObject.password;
 	delete userObject.tokens;
+	delete userObject.avatar;
 
 	return userObject;
 }
