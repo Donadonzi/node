@@ -2,6 +2,7 @@ const express = require('express');
 const http = require('http');
 const path = require('path');
 const socketio = require('socket.io');
+const Filter = require('bad-words');
 
 
 const app = express();
@@ -13,9 +14,36 @@ const publicDirectory = path.join(__dirname, '../public');
 
 app.use(express.static(publicDirectory));
 
-io.on('connection', () => {
+const message = 'Welcome dear :)';
+
+
+io.on('connection', (socket) => {
 	console.log('New websocket connection!');
+
+	socket.emit('message', message);
+	socket.broadcast.emit('message', 'A new user has joined!');
+
+	socket.on('sendMessage', (text, callback) => {
+		const filter = new Filter();
+		if (filter.isProfane(text)) {
+			return callback('Profanity is not allowed!');
+		}
+		io.emit('message', text);
+		callback();
+	});
+
+	socket.on('disconnect', () => {
+		io.emit('message', 'A user has left!');
+	});
+
+	socket.on('sendLocation', (data, callback) => {
+		io.emit('locationMessage', `https://google.com/maps?q=${data.lat},${data.long}`);
+		callback();
+	});
+
 });
+
+
 
 server.listen(port, () => {
 	console.log('Yallah! Server umad bala roo port: ' + port);
