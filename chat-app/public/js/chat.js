@@ -15,58 +15,33 @@ const sidebarTemplate = document.querySelector('#sidebar-template').innerHTML;
 // Options
 const { username, room } = Qs.parse(location.search, { ignoreQueryPrefix: true });
 
-// //////// A function for controlling autimatic scrolling /////////
-// const autoscroll = () => {
-
-// 	// Get the new message element
-// 	const $newMessage = $messages.lastElementChild;
-
-// 	// Get the height of the new message
-// 	const newMessageStyle = getComputedStyle($newMessage);
-// 	const newMessageMargin = parseInt(newMessageStyle.marginBottom);
-// 	const newMessageHeight = $newMessage.offsetHeight + newMessageMargin;
-
-// 	// Visible height
-// 	const visibleHeight = $messages.offsetHeight;
-
-// 	// Total height of the messages container
-// 	const containerHeight = $messages.scrollHeight;
-
-// 	// How far the user has scrolled?
-// 	const scrollOffset = $messages.scrollTop + visibleHeight;
-
-// 	// Decide wether to auto-scroll or not
-// 	if (containerHeight - newMessageHeight <= scrollOffset) {
-// 		$messages.scrollTop = $messages.scrollHeight;   // go all the way down
-// 	}
-// }
 
 
-
+//////// A function for controlling autimatic scrolling /////////
 const autoscroll = () => {
-	// New message element
-	const $newMessage = $messages.lastElementChild
 
-	// Height of the new message
-	const newMessageStyles = getComputedStyle($newMessage)
-	const newMessageMargin = parseInt(newMessageStyles.marginBottom)
-	const newMessageHeight = $newMessage.offsetHeight + newMessageMargin
+	// Get the new message element
+	const $newMessage = $messages.lastElementChild;
+
+	// Get the height of the new message
+	const newMessageStyles = getComputedStyle($newMessage);
+	const newMessageMargin = parseInt(newMessageStyles.marginBottom);
+	const newMessageHeight = $newMessage.offsetHeight + newMessageMargin;
 
 	// Visible height
-	const visibleHeight = $messages.offsetHeight
+	const visibleHeight = $messages.offsetHeight;
 
-	// Height of messages container
-	const containerHeight = $messages.scrollHeight
+	// Total height of the messages container
+	const containerHeight = $messages.scrollHeight;
 
-	// How far have I scrolled?
-	const scrollOffset = $messages.scrollTop + visibleHeight
+	// How far the user has scrolled?
+	const scrollOffset = $messages.scrollTop + visibleHeight;
 
+	// Decide wether to auto-scroll or not
 	if (containerHeight - newMessageHeight <= scrollOffset) {
-		$messages.scrollTop = $messages.scrollHeight
+		$messages.scrollTop = $messages.scrollHeight;   // go all the way down
 	}
 }
-
-
 
 
 //////// Event listener for chat messages /////////
