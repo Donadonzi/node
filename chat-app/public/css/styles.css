@@ -41,26 +41,27 @@ input {
 button {
     cursor: pointer;
     padding: 12px;
-    background: #7C5CBF;
+    background: #52cfee;
     border: none;
     color: white;
     font-size: 16px;
-    transition: background .3s ease;
+		transition: background .3s ease;
+		border-radius: 5px;
 }
 
 button:hover {
-    background: #6b47b8;
+    background: #211ee9;
 }
 
 button:disabled {
     cursor: default;
-    background: #7c5cbf94;
+    background: #a8a1b694;
 }
 
 /* Join Page Styles */
 
 .centered-form {
-    background: #333744;
+    background: #a7b5e2;
     width: 100vw;
     height: 100vh;   
     display: flex;
@@ -87,17 +88,20 @@ button:disabled {
 /* Chat Page Layout */
 
 .chat {
-    display: flex;
+		display: flex;
 }
+
 
 .chat__sidebar {
     height: 100vh;
     color: white;
     background: #333744;
     width: 225px;
-    overflow-y: scroll
+		overflow-y: scroll
+		
 }
 
+	
 /* Chat styles */
 
 .chat__main {
@@ -131,7 +135,7 @@ button:disabled {
 }
 
 .message a {
-    color: #0070CC;
+    color: #098619;
 }
 
 /* Message Composition Styles */
@@ -142,6 +146,9 @@ button:disabled {
     margin-top: 16px;
     padding: 24px;
 }
+
+
+			
 
 .compose form {
     display: flex;
